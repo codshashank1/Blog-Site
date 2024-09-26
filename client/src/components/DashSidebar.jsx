@@ -40,16 +40,10 @@ export default function DashSidebar() {
             >
             Profile
             </Sidebar.Item>
-          </Link>
-          
-          
-          
-          
+          </Link> 
           <Sidebar.Item
-            
             icon={HiArrowSmRight}
             className='cursor-pointer'
-            
           >
             Sign Out
           </Sidebar.Item>
