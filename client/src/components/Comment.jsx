@@ -53,24 +53,7 @@ export default function Comment({comment, onLike, onEdit, onDelete}) {
         }
       };
 
-      const handleDelete = async (commentId) => {
-        setShowModal(false);
-        try {
-          if (!currentUser) {
-            navigate('/sign-in');
-            return;
-          }
-          const res = await fetch(`/api/comment/deleteComment/${commentId}`, {
-            method: 'DELETE',
-          });
-          if (res.ok) {
-            const data = await res.json();
-            setComments(comments.filter((comment) => comment._id !== commentId));
-          }
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
+      
     
   return (
     <div className='flex p-4 border-b dark:border-gray-600 text-sm'>
