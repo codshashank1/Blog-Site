@@ -5,13 +5,16 @@ import {
   getPostComments,  
   likeComment,
   editComment,
+  deleteComment,
 } from '../controllers/comment.controller.js';
+import { deleteModel } from 'mongoose';
 
 const router = express.Router();
 
 router.post('/create', verifyToken, createComment);
 router.get('/getPostComments/:postId', getPostComments);
-router.put('/likecomment/:commentId', verifyToken, likeComment)
-router.put('/editcomment/:commentId', verifyToken, editComment)
+router.put('/likeComment/:commentId', verifyToken, likeComment)
+router.put('/editComment/:commentId', verifyToken, editComment)
+router.delete('/deleteComment/:commentId', verifyToken, deleteComment)
 
 export default router;

@@ -4,7 +4,7 @@ import { FaThumbsUp } from 'react-icons/fa'
 import { useSelector } from "react-redux"
 import { Textarea, Button} from "flowbite-react"
 
-export default function Comment({comment, onLike, onEdit}) {
+export default function Comment({comment, onLike, onEdit, onDelete}) {
 
     const [user, setUser] = useState({})
     const {currentUser} = useSelector((state) => state.user)
@@ -47,6 +47,25 @@ export default function Comment({comment, onLike, onEdit}) {
           if (res.ok) {
             setIsEditing(false);
             onEdit(comment, editedContent);
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
+
+      const handleDelete = async (commentId) => {
+        setShowModal(false);
+        try {
+          if (!currentUser) {
+            navigate('/sign-in');
+            return;
+          }
+          const res = await fetch(`/api/comment/deleteComment/${commentId}`, {
+            method: 'DELETE',
+          });
+          if (res.ok) {
+            const data = await res.json();
+            setComments(comments.filter((comment) => comment._id !== commentId));
           }
         } catch (error) {
           console.log(error.message);
